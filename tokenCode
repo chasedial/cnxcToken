@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 contract token {
+    // Defining the variables and mapping
     mapping(address => uint) public balances;
     mapping(address => mapping(address => uint)) public allowance;
     uint public totalSupply = 100000000 * 10 ** 18;
@@ -9,17 +10,21 @@ contract token {
     string public symbol = "CNXC";
     uint public decimals = 18;
 
+    // Declare emit events
     event Transfer(address indexed from, address indexed to, uint value);
     event Approval(address indexed owner, address indexed spender, uint value);
     
+    // the address that will deploy the contract / send the transaction
     constructor(){
-        balances[msg.sender] = totalSupply;
+        balances[msg.sender] = totalSupply; 
     }
 
+    // Function to read the balance of user address
     function balanceOf(address owner) public view returns(uint){
         return balances[owner];
     }
 
+    // Transfer token(s) from 1 address to another address
     function transfer(address to, uint value) public returns(bool){
         require(balanceOf(msg.sender) >= value, 'balance too low');
         balances[to] += value;
@@ -28,6 +33,7 @@ contract token {
         return true;
     }
 
+    // Delegated transfers; another address can spend tokens on behalf of another address
     function transferFrom(address from, address to, uint value) public returns(bool){
         require(balanceOf(from) >= value, 'balance too low');
         require(allowance[from][msg.sender] >= value, 'allowance too low');
