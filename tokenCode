@@ -6,8 +6,8 @@ contract token {
     mapping(address => uint) public balances;
     mapping(address => mapping(address => uint)) public allowance;
     uint public totalSupply = 100000000 * 10 ** 18;
-    string public name = "CyberNex Chase";
-    string public symbol = "CNXC";
+    string public name = "[token name]"; // change to own name
+    string public symbol = "[token id/symbol]"; // change to own id/symbol
     uint public decimals = 18;
 
     // Declare emit events
